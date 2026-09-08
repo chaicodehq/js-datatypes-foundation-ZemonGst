@@ -1,9 +1,9 @@
 /**
  * ☕ Chai Tapri Order System - String Basics
  *
- * Guddu ki chai tapri hai college ke bahar. Customers order dete hain,
- * aur Guddu ko string methods use karke orders handle karne hain.
- * Tu Guddu ka helper hai — basic string methods seekh aur orders process kar!
+ * Guddu has a tea stall outside the college. Customers give orders,
+ * and Guddu needs to handle orders using string methods.
+ * You are Guddu's helper — learn basic string methods and process orders!
  *
  * Methods to explore: .length, .toUpperCase(), .toLowerCase(),
  *   .trim(), .includes(), .charAt(), .at()
@@ -11,33 +11,33 @@
  * Functions:
  *
  *   1. getChaiOrderLength(order)
- *      - Pehle .trim() se extra spaces hatao, phir .length se count karo
- *      - Agar order string nahi hai, return -1
+ *      - First remove extra spaces using .trim(), then count using .length
+ *      - If order is not a string, return -1
  *      - Example: getChaiOrderLength("  masala chai  ") => 11
  *
  *   2. shoutChaiOrder(order)
- *      - Guddu apne helper ko UPPERCASE mein order shout karta hai
- *      - Pehle .trim() karo, phir .toUpperCase()
- *      - Agar order string nahi hai ya trim ke baad empty hai, return ""
+ *      - Guddu shouts the order to his helper in UPPERCASE
+ *      - First use .trim(), then .toUpperCase()
+ *      - If order is not a string or is empty after trimming, return ""
  *      - Example: shoutChaiOrder("masala chai") => "MASALA CHAI"
  *
  *   3. whisperChaiOrder(order)
- *      - Jab koi secretly order karta hai, lowercase mein likho
- *      - Pehle .trim() karo, phir .toLowerCase()
- *      - Agar order string nahi hai ya trim ke baad empty hai, return ""
+ *      - When someone orders secretly, write in lowercase
+ *      - First use .trim(), then .toLowerCase()
+ *      - If order is not a string or is empty after trimming, return ""
  *      - Example: whisperChaiOrder("ADRAK CHAI") => "adrak chai"
  *
  *   4. hasSpecialIngredient(order, ingredient)
- *      - Check karo ki order mein koi special ingredient hai ya nahi
- *      - Dono ko .toLowerCase() karo, phir .includes() use karo
- *      - Agar koi bhi string nahi hai, return false
+ *      - Check if the order has any special ingredient or not
+ *      - Convert both to .toLowerCase(), then use .includes()
+ *      - If either is not a string, return false
  *      - Example: hasSpecialIngredient("Elaichi Masala Chai", "elaichi") => true
  *
  *   5. getFirstAndLastChar(order)
- *      - .charAt(0) se pehla character aur .at(-1) se aakhri character nikalo
- *      - Pehle .trim() karo
+ *      - Extract the first character using .charAt(0) and the last character using .at(-1)
+ *      - First use .trim()
  *      - Return: { first, last }
- *      - Agar order string nahi hai ya trim ke baad empty hai, return null
+ *      - If order is not a string or is empty after trimming, return null
  *      - Example: getFirstAndLastChar("masala chai") => { first: "m", last: "i" }
  *
  * @example
@@ -50,70 +50,47 @@ export function getChaiOrderLength(order) {
   if (typeof order !== "string") {
     return -1;
   } else {
-    let trimed_order = order.trim();
-    return trimed_order.length;
+    let o = order;
+    return o.trim().length;
   }
 }
 
 export function shoutChaiOrder(order) {
   // Your code here
-  if (typeof order !== "string") {
+  if (typeof order !== "string" || order.trim().length === 0) {
     return "";
   } else {
-    let trimed_order = order.trim();
-    if (trimed_order.length === 0) {
-      return "";
-    } else {
-      return trimed_order.toUpperCase()
-    }
+    return order.trim().toUpperCase();
   }
 }
 
 export function whisperChaiOrder(order) {
   // Your code here
-  if (typeof order !== "string") {
+  if (typeof order !== "string" || order.trim().length === 0) {
     return "";
   } else {
-    let trimed_order = order.trim();
-    if (trimed_order.length === 0) {
-      return "";
-    } else {
-      return trimed_order.toLowerCase()
-    }
+    return order.trim().toLowerCase();
   }
 }
 
 export function hasSpecialIngredient(order, ingredient) {
   // Your code here
-  if (typeof order !== "string") {
+  if (typeof order !== "string" || typeof ingredient !== "string") {
     return false;
-  }
-  if (typeof ingredient !== "string") {
-    return false;
-  }
-
-
-  let order_lowercase = order.toLowerCase();
-  let ingredient_lowercase = ingredient.toLowerCase();
-  if (order_lowercase.includes(ingredient_lowercase)) {
-    return true;
   } else {
-    return false;
+    return order.toLowerCase().includes(ingredient.toLowerCase());
   }
 }
 
 export function getFirstAndLastChar(order) {
   // Your code here
-  if (typeof order !== "string") {
-    return null;
-  }
-  let trimed_order = order.trim()
-  if (trimed_order.length === 0) {
+  if (typeof order !== "string" || order.trim().length === 0) {
     return null;
   } else {
+    const odr = order.trim();
     return {
-      first: trimed_order.charAt(0),
-      last: trimed_order.at(-1)
-    }
-  };
+      first: odr.charAt(0),
+      last: odr.at(-1),
+    };
+  }
 }
