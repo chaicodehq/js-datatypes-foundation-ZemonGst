@@ -1,9 +1,9 @@
 /**
  * 🛺 Auto Rickshaw Fare Calculator - Number & Math
  *
- * Bhaiyya ji ka auto rickshaw hai. Meter se fare calculate hota hai.
- * Different math operations chahiye — round karna, min/max nikalna,
- * strings se numbers parse karna. Tu Bhaiyya ji ka meter software bana!
+ * It's the auto rickshaw. Fare is calculated by the meter.
+ * Different math operations are needed — rounding, finding min/max,
+ * parsing numbers from strings. You have to build the meter software!
  *
  * Methods to explore: parseFloat(), parseInt(), .toFixed(),
  *   Math.ceil(), Math.max(), Math.min(), Math.abs()
@@ -11,37 +11,37 @@
  * Functions:
  *
  *   1. parseFare(fareString)
- *      - Customer bolte hain "152.50" as string — parseFloat() se number banao
- *      - Agar result NaN hai ya fareString string nahi hai, return -1
+ *      - Customer says "152.50" as a string — convert it to a number using parseFloat()
+ *      - If the result is NaN or fareString is not a string, return -1
  *      - Example: parseFare("152.50") => 152.5
  *      - Example: parseFare("abc") => -1
  *
  *   2. roundFare(amount, decimalPlaces)
- *      - .toFixed(decimalPlaces) se fare round karo
- *      - Result STRING return hota hai (toFixed returns string)
- *      - Agar amount number nahi hai ya decimalPlaces non-negative integer nahi hai, return ""
+ *      - Round the fare using .toFixed(decimalPlaces)
+ *      - The result returned is a STRING (toFixed returns a string)
+ *      - If amount is not a number or decimalPlaces is not a non-negative integer, return ""
  *      - Example: roundFare(152.567, 2) => "152.57"
  *      - Example: roundFare(152.567, 0) => "153"
  *
  *   3. calculateSurge(baseFare, surgeMultiplier)
- *      - baseFare * surgeMultiplier karo
- *      - Math.ceil() se always round UP (auto wale ko paisa milna chahiye!)
- *      - Agar baseFare ya surgeMultiplier positive number nahi hai, return 0
+ *      - Multiply baseFare by surgeMultiplier
+ *      - Always round UP using Math.ceil() (the driver should get paid!)
+ *      - If baseFare or surgeMultiplier is not a positive number, return 0
  *      - Example: calculateSurge(100, 1.5) => 150
  *      - Example: calculateSurge(73, 1.8) => 132 (Math.ceil(131.4))
  *
  *   4. findCheapestAndCostliest(...fares)
- *      - Rest parameter (...) se variable number of fares le
- *      - Math.min() aur Math.max() se cheapest aur costliest dhundho
- *      - Non-number values filter out karo
- *      - Agar koi valid number nahi mila, return null
+ *      - Take a variable number of fares using the rest parameter (...)
+ *      - Find the cheapest and costliest fares using Math.min() and Math.max()
+ *      - Filter out non-number values
+ *      - If no valid number is found, return null
  *      - Return: { cheapest, costliest }
  *      - Example: findCheapestAndCostliest(150, 80, 200) => { cheapest: 80, costliest: 200 }
  *
  *   5. getDistanceDifference(from, to)
- *      - parseInt() se string km markers ko numbers mein convert karo
- *      - Math.abs() se absolute difference nikalo (direction matter nahi karta)
- *      - Agar parse ke baad koi NaN hai, return -1
+ *      - Convert string km markers to numbers using parseInt()
+ *      - Find the absolute difference using Math.abs() (direction doesn't matter)
+ *      - If any value is NaN after parsing, return -1
  *      - Example: getDistanceDifference(5, 12) => 7
  *      - Example: getDistanceDifference("15", "8") => 7
  *
@@ -52,55 +52,24 @@
  */
 export function parseFare(fareString) {
   // Your code here
-  if (typeof fareString !== "string") {
+  if (typeof fareString !== "string" || Number.isNaN(Number(fareString))) {
     return -1;
   }
-  let result = parseFloat(fareString)
-
-  if (isNaN(result)) {
-    return -1;
-  }
-
-  return result;
+  return parseFloat(fareString);
 }
 
 export function roundFare(amount, decimalPlaces) {
   // Your code here
-  if ( typeof amount !== "number" || typeof decimalPlaces !== "number" || !Number.isInteger(decimalPlaces) || decimalPlaces < 0) {
-    return "";
-  }
-
-  return amount.toFixed(decimalPlaces);
 }
 
 export function calculateSurge(baseFare, surgeMultiplier) {
   // Your code here
-  if (typeof baseFare !== "number" || baseFare <= 0 || typeof surgeMultiplier !== "number" || surgeMultiplier <= 0  ) {
-    return 0;
-  }
-
-  return Math.ceil(baseFare *surgeMultiplier);
 }
 
 export function findCheapestAndCostliest(...fares) {
   // Your code here
-   const validFares = fares.filter((fare) => Number.isFinite(fare));
-  if (validFares.length === 0) {
-    return null;
-  }
-
-  const cheapest = Math.min(...validFares);
-  const costliest = Math.max(...validFares);
-  return { cheapest, costliest };
 }
 
 export function getDistanceDifference(from, to) {
   // Your code here
-  let starting_km = parseInt(from);
-  let end_km = parseInt(to);
-   if (isNaN(starting_km) || isNaN(end_km)) {
-    return -1;
-  }
-  return Math.abs(starting_km - end_km);
-
 }
